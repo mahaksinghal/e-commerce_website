@@ -25,6 +25,7 @@ from main import views as mv
 urlpatterns = [
     path('admin/', admin.site.urls),
     # customer
+    path('accounts/', include('allauth.urls')),     # django allauth
     path("login/customer", mv.customer_login_view, name = "customer_login"),
     path("register/customer", mv.customer_register_view, name = "customer_register"),
     path("forgot/customer", mv.customer_forgot_pass_view, name = "customer_forgot_pass"),
