@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # local apps
+    'main',
+    'product',
+    # 3rd party apps
     "django_browser_reload",
     'allauth',
     'allauth.account',
@@ -141,3 +145,5 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by email
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+LOGIN_REDIRECT_URL = "home"    # goto home page after login
+LOGOUT_REDIRECT_URL = "home"   # goto home page after logout
