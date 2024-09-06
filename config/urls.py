@@ -38,6 +38,8 @@ urlpatterns = [
     # index
     path("", mv.home_view, name = "home"),
     path("__reload__/", include("django_browser_reload.urls")),
+    #  details
+    path('detail/<int:id>/', mv.detail_view, name='detail'),
     
 ]
 

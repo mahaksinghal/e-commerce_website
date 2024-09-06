@@ -2,14 +2,28 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
+from product.models import Product, Category
 
 # Create your views here.
 def home_view(request):
-    return render(request, "home.html")
+    products = Product.objects.all()
+    category = Category.objects.all()
+    ctx = {
+        'products': products,
+        'categories': category,
+    }
+    return render(request, "home.html", ctx)
 
 def logout_view(request):
     logout(request)
     return redirect("home")
+
+# details of a product
+def detail_view(request, id):
+    ctx = {
+        'product': Product.objects.get(id=id)
+    }
+    return render(request, 'details.html', ctx)
 
 # seller views
 def seller_login_view(request):
