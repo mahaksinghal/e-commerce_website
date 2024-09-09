@@ -1,17 +1,89 @@
+{% extends 'layout/base.html' %}
+{% block head %}{% endblock head %}
+
+{% block css %}
+<style>
+
+</style>
+{% endblock css %}
+
+{% block content %}
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="{{product.image.url}}" alt="{{product.title}}">
+    <div class="row border border-secondary-subtle">
+        <div
+            class="col-md-6 d-flex align-items-center justify-content-center img-thumbnail border-top-0 border-bottom-0 rounded-0">
+            <img src="{{product.image.url}}" alt="{{product.title}}" class="img-fluid">
         </div>
         <div class="col-md-6">
             <h2 class="">{{product.title}}</h2>
-            <p class="">{{product.price}}</p>
-            <p class="">{{product.created_at|date:"F j, Y"}}</p>
-            {{product.description|linebreaksbr}}
+
+            <div class="mb-3">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
             </div>
-            <button class="btn btn-outline-primary" type="submit">
+            <p class="h4 mb-3">&#8377;{{product.price}}</p>
+            <ul>
+                <li>
+                    {{product.description|linebreaksbr}}
+                </li>
+            </ul>
+            <hr style="width: 250px;" class="ms-4">
+            <button class="btn btn-secondary ms-4 px-5 rounded-0 mb-4" type="submit">
                 Buy Now
             </button>
         </div>
     </div>
 </div>
+<!-- ------------------------------------------------------------------------ -->
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="text-center mt-4 mb-3">Similar Products</h1>
+    </div>
+
+    <div class="d-flex border">
+        <div class="col-md-4 d-flex">
+            <img src="{{product.image.url}}" alt="" class="border border-dark img-fluid" height="250px" , width="250px">
+            <div class="ms-4">
+                <h5 class="">PRODUCT NAME</h5>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <p class="mb-3">&#8377;000</p>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex">
+            <img src="{{product.image.url}}" alt="" class="border border-dark img-fluid" height="250px" , width="250px">
+            <div class="ms-4">
+                <h5 class="">PRODUCT NAME</h5>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <p class="mb-3">&#8377;000</p>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex">
+            <img src="{{product.image.url}}" alt="" class="border border-dark img-fluid" height="250px" , width="250px">
+            <div class="ms-4">
+                <h5 class="">PRODUCT NAME</h5>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <p class="mb-3">&#8377;000</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block js %}{% endblock js %}
