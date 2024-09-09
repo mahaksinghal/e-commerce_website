@@ -40,6 +40,8 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     #  details
     path('detail/<int:id>/', mv.detail_view, name='detail'),
+    # category
+    path('cat/<slug:name>', mv.category_view, name='category')
     
 ]
 

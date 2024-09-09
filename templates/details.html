@@ -7,10 +7,7 @@
             <h2 class="">{{product.title}}</h2>
             <p class="">{{product.price}}</p>
             <p class="">{{product.created_at|date:"F j, Y"}}</p>
-            <div class="">
-                <li class="">
-                    {{product.description|linebreaksbr}}
-                </li>
+            {{product.description|linebreaksbr}}
             </div>
             <button class="btn btn-outline-primary" type="submit">
                 Buy Now

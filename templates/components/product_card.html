@@ -1,36 +1,11 @@
-{% block css %}
-<style>
-    .card{
-        width: 300px;
-        object-fit: cover;
-    }
-
-    .card-img{
-        height: 300px;
-        object-fit: contain;
-        margin: 4px;
-    }
-</style>
-{% endblock css %}
-    
-
-<div class="container pt-2">
-    <div class="row">
-        
-        {% for product in products %}
-            <div class="card col-md-3 me-3 mb-2">
-                <img src="{{product.image.url}}" alt="{{product.title}}" class="card-img">
-                <div class="card-body">
-                    <h3 class="card-title">{{product.title|truncatewords:3}}</h3>
-                    <p class="card-price">{{product.price}}</p>
-                    <p class="card-time">{{product.created_at|date:"F j, Y"}}</p>
-                </div>
-                <div class="p-2">
-                    <a href="{% url 'detail' product.id %}" class="btn btn-secondary mb-2">
-                        View Details</a>
-                </div>
+<div class="col-md-4 mb-4">
+    <a href="{% url 'detail' product.id %}" class="text-decoration-none">
+        <div class="card h-100">
+            <img src="{{product.image.url}}" alt="{{product.title}}" class="card-img-top img-fluid">
+            <div class="card-body">
+                <h5 class="card-title">{{product.title|truncatewords:3}}</h5>
+                <p class="card-text">{{product.price}}</p>
             </div>
-        {% endfor %}
-            
-    </div>
+        </div>
+    </a>
 </div>

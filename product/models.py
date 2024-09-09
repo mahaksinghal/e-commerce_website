@@ -18,7 +18,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    title = models.CharField(max_length = 150, help_text="Enter Product Name")
+    title = models.CharField(max_length = 200, help_text="Enter Product Name")
     price = models.DecimalField(max_digits=8, decimal_places=2)
     description = models.TextField(help_text="Enter Product Description")
     image = models.ImageField(upload_to='product')
