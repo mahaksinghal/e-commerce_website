@@ -20,8 +20,13 @@ def logout_view(request):
 
 # details of a product
 def detail_view(request, id):
+    product = Product.objects.get(id=id)
+    # get upto 3 similar products
+    # category = product.category
+    similar_products = Product.objects.filter(category=product.category).exclude(id=id).order_by('?')[:3]
     ctx = {
-        'product': Product.objects.get(id=id)
+        'product': product,
+        'similar_products': similar_products
     }
     return render(request, 'details.html', ctx)
 
