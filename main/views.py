@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_list_or_404, get_object_or_40
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
-from product.models import Product, Category
+from product.models import Product, Category, Review
+from product.forms import ReviewForm
 
 # Create your views here.
 def home_view(request):
@@ -23,10 +24,14 @@ def detail_view(request, id):
     product = Product.objects.get(id=id)
     # get upto 3 similar products
     # category = product.category
-    similar_products = Product.objects.filter(category=product.category).exclude(id=id).order_by('?')[:3]
+    similar_products = Product.objects.filter(category=product.category).exclude(id=id).order_by('?')[:3] # order by random
+    # get latest reviews
+    reviews = Review.objects.filter(product=product).order_by('-created_at') # reverse order
     ctx = {
         'product': product,
-        'similar_products': similar_products
+        'similar_products': similar_products,
+        'reviews': reviews,
+        'review_form': ReviewForm(),
     }
     return render(request, 'details.html', ctx)
 
