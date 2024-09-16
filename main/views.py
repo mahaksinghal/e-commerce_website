@@ -4,14 +4,17 @@ from django.contrib.auth.models import User, Group
 from django.contrib import messages
 from product.models import Product, Category, Review
 from product.forms import ReviewForm
+from .models import SliderImage
 
 # Create your views here.
 def home_view(request):
     products = Product.objects.all()
     categories = Category.objects.all()
+    slider_images = SliderImage.objects.order_by('created_at')[:4]
     ctx = {
         'products': products,
         'categories': categories,
+        'slider_images': slider_images,
     }
     return render(request, "home.html", ctx)
 
@@ -90,3 +93,17 @@ def customer_register_view(request):
 
 def customer_forgot_pass_view(request):
     return render(request, 'accounts/customer/forgot_password.html')
+
+# search
+def search_view(request):
+    query = request.GET.get('q')
+    products = Product.objects.filter(title__icontains=query)
+    category = Category.objects.filter(title__icontains=query)
+    return render(
+        request, 'search.html',
+        context={
+            'products': products,
+            'categories': category,
+            'query': query,
+        }
+    )
