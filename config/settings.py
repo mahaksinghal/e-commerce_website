@@ -149,3 +149,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 LOGIN_REDIRECT_URL = "home"    # goto home page after login
 LOGOUT_REDIRECT_URL = "home"   # goto home page after logout
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+# load the variables from .env file
+RAZOR_KEY_ID = os.getenv('RAZOR_KEY_ID')
+RAZOR_KEY_SECRET = os.getenv('RAZOR_KEY_SECRET')

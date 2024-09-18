@@ -5,3 +5,5 @@ crispy-bootstrap5
 django-browser-reload
 django-allauth
 stripe
+python-dotenv
+razorpay

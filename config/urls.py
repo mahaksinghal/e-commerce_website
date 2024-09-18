@@ -21,6 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
 from main import views as mv
+from cart import views as cv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,8 +43,15 @@ urlpatterns = [
     #  details
     path('detail/<int:id>/', mv.detail_view, name='detail'),
     # category
-    path('cat/<slug:name>', mv.category_view, name='category')
-    
+    path('cat/<slug:name>', mv.category_view, name='category'),
+    # cart
+    path('payment/initiate', cv.initiate_payment, name='init_payment'),
+    path('payment/callback', cv.callback, name='callback'),
+    path('success/', cv.success_view, name='success'),
+    path('failure/', cv.failure_view, name='failure'),
+    # review
+    path('review/add/<int:id>', mv.add_review, name='add_review'),
+    path('review/edit/<int:id>', mv.edit_review, name='edit_review')
 ]
 
 if settings.DEBUG:

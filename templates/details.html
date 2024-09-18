@@ -29,19 +29,34 @@
                 <i class="fa-regular fa-star"></i>
             </div>
             <p class="h4 mb-3">&#8377; {{product.price|intcomma}}</p>
-            <ul>
-                <li>
-                    {{product.description|linebreaksbr}}
-                </li>
-            </ul>
+                {{product.description|linebreaksbr}}
             <hr>
             <p class="lead"><strong>Seller: </strong>
                 {{product.seller}}
             </p>
             <hr style="width: 250px;">
-            <button class="btn btn-secondary px-5 rounded-0 mb-4" type="submit">
-                Buy Now
-            </button>
+            <!-- <div class="d-flex gap-3">
+                <a href="#" class="btn btn-primary rounded-0 btn-large">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <form action="{% url 'init_payment' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{product.id}}">
+                    <button class="btn btn-secondary px-5 rounded-0 mb-4">
+                        Buy Now
+                    </button>
+                </form>
+            </div> -->
+            <div class="d-flex gap-3 mb-3">
+                <a href="#" class="btn btn-primary rounded-0 btn-large">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <form action="{% url 'init_payment' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{product.id}}">
+                    <button class="btn btn-outline-danger btn-lg rounded-0">Buy Now</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -106,7 +121,7 @@
         <div class="col-md-2 mb-4">
             <a href="{% url 'detail' product.id %}" class="text-decoration-none">
                 <div class="card h-100">
-                    <img src="{{product.image.url}}" alt="{{product.titlea}}" class="card-img-top img-fluid">
+                    <img src="{{product.image.url}}" alt="{{product.title}}" class="card-img-top img-fluid">
                     <div class="card-body">
                         <h5 class="card-title">{{product.title|truncatewords:3}}</h5>
                         <p class="card-text">{{product.price}}</p>
@@ -131,7 +146,13 @@
 
                 {% if user.is_authenticated %}
                 <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#addReview">
-                    Add Your Review
+                    
+                    {% if has_reviewed %}
+                        Edit Your Review
+                    {% else %}
+                        Add Your Review
+                    {% endif %}
+                        
                 </button>
                 {% endif %}
             </h2>
@@ -166,7 +187,12 @@
 
 <!-- Modal -->
 <div class="modal fade" id="addReview" tabindex="-1" aria-labelledby="addReviewLabel" aria-hidden="true">
-    <div class="modal-dialog" action="">
+    
+    {% if has_reviewed %}
+    <div class="modal-dialog" action="{% url 'edit_review' product.id %}" method="post">
+    {% else %}
+    <div class="modal-dialog" action="{% url 'add_review' product.id %}" method="post">
+    {% endif %}
         {% csrf_token %}
         <div class="modal-content">
             <div class="modal-header">
@@ -177,7 +203,7 @@
                 {{review_form}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save Reviews</button>
+                <button class="btn btn-primary">Save Reviews</button>
             </div>
         </div>
     </div>
