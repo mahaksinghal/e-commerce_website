@@ -23,6 +23,7 @@ def logout_view(request):
     return redirect("home")
 
 # details of a product
+
 def detail_view(request, id):
     product = Product.objects.get(id=id)
     # get upto 3 similar products
@@ -31,7 +32,9 @@ def detail_view(request, id):
     # get latest reviews
     reviews = Review.objects.filter(product=product).order_by('-created_at') # reverse order
     # if user has review product, then allow to edit
-    review = Review.objects.filter(product=product, customer=request.user).first()
+    review = None
+    if request.user.is_authenticated:
+        review = Review.objects.filter(product=product, customer=request.user).first()
     if review:
         review_form = ReviewForm(instance=review)
     else:
@@ -123,7 +126,7 @@ def add_review(request, id):
     if form.is_valid():
         review = form.save(commit=False)
         review.product = product
-        review.user = request.user
+        review.customer = request.user
         review.save()
         messages.success(request, 'Review added successfully')
     else:

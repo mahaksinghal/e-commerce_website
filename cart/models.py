@@ -4,7 +4,7 @@ from product.models import Product
 
 # Create your models here.
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
 
 class CartItem(models.Model):

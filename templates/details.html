@@ -48,7 +48,7 @@
                 </form>
             </div> -->
             <div class="d-flex gap-3 mb-3">
-                <a href="#" class="btn btn-primary rounded-0 btn-large">
+                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary rounded-0 btn-large">
                     <i class="fas fa-shopping-cart"></i>
                 </a>
                 <form action="{% url 'init_payment' %}" method="post">
@@ -189,9 +189,9 @@
 <div class="modal fade" id="addReview" tabindex="-1" aria-labelledby="addReviewLabel" aria-hidden="true">
     
     {% if has_reviewed %}
-    <div class="modal-dialog" action="{% url 'edit_review' product.id %}" method="post">
+    <form class="modal-dialog" action="{% url 'edit_review' product.id %}" method="post">
     {% else %}
-    <div class="modal-dialog" action="{% url 'add_review' product.id %}" method="post">
+    <form class="modal-dialog" action="{% url 'add_review' product.id %}" method="post">
     {% endif %}
         {% csrf_token %}
         <div class="modal-content">
