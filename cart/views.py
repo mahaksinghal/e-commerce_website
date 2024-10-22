@@ -96,7 +96,7 @@ def add_to_cart(request, id):
     product = Product.objects.get(id=id)
     try:
         cart = Cart.objects.get(user=request.user)
-        print("Cart already created")    
+        print("Cart already created")
     except:
         cart = Cart.objects.create(user=request.user)
         print("New cart created")

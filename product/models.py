@@ -11,7 +11,7 @@ class Category(models.Model):
     def __str__(self):
         return self.title
     
-    # when th category is saved, create the slug using the slugify function and store in db
+    # when the category is saved, create the slug using the slugify function and store in db
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Category, self).save(*args, **kwargs)
